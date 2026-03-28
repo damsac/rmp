@@ -1,0 +1,30 @@
+# Rust
+target/
+**/*.rs.bk
+
+# iOS
+ios/Frameworks/
+ios/*.xcodeproj
+ios/*.xcworkspace
+ios/DerivedData/
+ios/build/
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+android/app/src/main/jniLibs/
+android/local.properties
+*.apk
+
+# Nix
+result
+.direnv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
