@@ -17,15 +17,12 @@ targets:
           - "*.h"
           - "*.modulemap"
     dependencies:
-      - framework: "Frameworks/{{ProjectPascal}}Core.xcframework"
+      - framework: "Frameworks/{{project_underscore}}_ffi.xcframework"
         embed: false
-      - package: MapLibreSwiftUI
-        product: MapLibreSwiftUI
-      - package: MapLibreSwiftUI
-        product: MapLibreSwiftDSL
     settings:
       base:
         INFOPLIST_FILE: Info.plist
+        ENABLE_TESTABILITY: YES
     info:
       path: Info.plist
       properties:
@@ -36,16 +33,11 @@ targets:
     platform: iOS
     sources:
       - path: Tests
-      - path: Sources
-      - path: Bindings
-        excludes:
-          - "*.h"
-          - "*.modulemap"
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: "{{ProjectPascal}}"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/{{ProjectPascal}}.app/{{ProjectPascal}}"
+        BUNDLE_LOADER: "$(TEST_HOST)"
     dependencies:
       - target: "{{ProjectPascal}}"
-      - framework: "Frameworks/{{ProjectPascal}}Core.xcframework"
-        embed: false
-packages:
-  MapLibreSwiftUI:
-    url: https://github.com/maplibre/swiftui-dsl.git
-    from: "0.24.0"
