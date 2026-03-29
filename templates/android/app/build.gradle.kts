@@ -5,11 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "dev.damsac.{{project}}"
+    // NOTE: Java/Kotlin package names cannot contain hyphens.
+    // If {{project}} has hyphens, use {{project_underscore}} here instead.
+    namespace = "dev.damsac.{{project_underscore}}"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "dev.damsac.{{project}}"
+        applicationId = "dev.damsac.{{project_underscore}}"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -32,7 +34,7 @@ android {
     // Ensure UniFFI bindings exist before building
     tasks.register("ensureUniffiGenerated") {
         doLast {
-            val bindingsDir = file("src/main/java/dev/damsac/{{project}}/rust")
+            val bindingsDir = file("src/main/java/dev/damsac/{{project_underscore}}/rust")
             if (!bindingsDir.exists() || bindingsDir.listFiles()?.isEmpty() != false) {
                 throw GradleException(
                     "UniFFI Kotlin bindings not found at ${bindingsDir.path}. " +
