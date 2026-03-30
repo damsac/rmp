@@ -41,3 +41,25 @@ targets:
         BUNDLE_LOADER: "$(TEST_HOST)"
     dependencies:
       - target: "{{ProjectPascal}}"
+  "{{ProjectPascal}}UITests":
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: "{{ProjectPascal}}"
+
+schemes:
+  {{ProjectPascal}}:
+    build:
+      targets:
+        {{ProjectPascal}}: all
+    test:
+      targets:
+        - name: {{ProjectPascal}}Tests
+          randomExecutionOrder: true
+        - name: {{ProjectPascal}}UITests
+          randomExecutionOrder: true

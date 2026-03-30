@@ -5,7 +5,7 @@ edition = "2021"
 
 [lib]
 crate-type = ["lib", "staticlib", "cdylib"]
-name = "{{project_underscore}}"
+name = "{{project_underscore}}_ffi"
 
 [dependencies]
 {{project}}-core = { path = "../core" }
