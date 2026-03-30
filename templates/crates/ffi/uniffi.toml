@@ -1,7 +1,7 @@
 [bindings.kotlin]
 package_name = "dev.damsac.{{project}}.rust"
-cdylib_name = "{{project_underscore}}"
+cdylib_name = "{{project_underscore}}_ffi"
 
 [bindings.swift]
 module_name = "{{ProjectPascal}}Core"
-cdylib_name = "{{project_underscore}}"
+cdylib_name = "{{project_underscore}}_ffi"

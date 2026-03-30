@@ -13,10 +13,28 @@ Automatically records a short video of the app running on iOS Simulator and Andr
 
 ## How It Works
 
+### iOS (XCUITest approach)
+
 1. **Build**: The Rust core is cross-compiled and native bindings are generated (same as the main CI)
-2. **Boot**: A simulator (iOS) or emulator (Android) is started
-3. **Install & Launch**: The debug build is installed and launched on the virtual device
-4. **Record**: Screen recording captures ~8 seconds of the running app
+2. **Boot**: An iOS Simulator is started
+3. **Build for testing**: `xcodebuild build-for-testing` compiles the app and UI test bundle together
+4. **Record**: Screen recording starts on the simulator
+5. **Run UI test**: `xcodebuild test-without-building` runs the XCUITest, which launches the app and performs scroll interactions (swipe up/down through content, take a screenshot)
+6. **Upload**: The recording is uploaded to Blossom servers via the `blossom-upload` crate
+7. **Comment**: A PR comment is posted with a link to the video (or an artifact fallback)
+
+The XCUITest approach (`ios/UITests/`) replaces the previous manual install-launch-sleep workflow. Benefits:
+- The test controls app lifecycle (launch, interact, screenshot) deterministically
+- No hardcoded sleep durations for "recording time" -- the test drives real interactions
+- Screenshots are captured as test attachments for debugging
+- Easy to extend with more interaction scenarios
+
+### Android
+
+1. **Build**: The Rust core is cross-compiled and native bindings are generated
+2. **Boot**: An Android Emulator is started
+3. **Install & Launch**: The debug build is installed and launched on the emulator
+4. **Record**: Screen recording captures the running app
 5. **Upload**: The recording is uploaded to Blossom servers via the `blossom-upload` crate
 6. **Comment**: A PR comment is posted with a link to the video (or an artifact fallback)
 
