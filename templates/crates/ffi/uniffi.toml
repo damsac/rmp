@@ -1,5 +1,5 @@
 [bindings.kotlin]
-package_name = "dev.damsac.{{project}}.rust"
+package_name = "dev.damsac.{{project_underscore}}.rust"
 cdylib_name = "{{project_underscore}}_ffi"
 
 [bindings.swift]
